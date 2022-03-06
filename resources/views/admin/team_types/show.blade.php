@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-sm-6">
                     <a class="btn btn-default float-right"
-                       href="{{ route('teamTypes.index') }}">
+                       href="{{ route('admin.teamTypes.index') }}">
                         Back
                     </a>
                 </div>
@@ -21,7 +21,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="row">
-                    @include('team_types.show_fields')
+                    @include('admin.team_types.show_fields')
                 </div>
             </div>
         </div>

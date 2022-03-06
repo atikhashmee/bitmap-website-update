@@ -1,25 +1,31 @@
 <div class="table-responsive">
-    <table class="table" id="proftfolioCategories-table">
+    <table class="table" id="testimonials-table">
         <thead>
         <tr>
-            <th>Name</th>
-        <th>Description</th>
+            <th>Client Name</th>
+        <th>Comment</th>
+        <th>Client Media</th>
+        <th>Client Image</th>
+        <th>Signature Image</th>
             <th colspan="3">Action</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($proftfolioCategories as $proftfolioCategory)
+        @foreach($testimonials as $testimonial)
             <tr>
-                <td>{{ $proftfolioCategory->name }}</td>
-            <td>{{ $proftfolioCategory->description }}</td>
+                <td>{{ $testimonial->client_name }}</td>
+            <td>{{ $testimonial->comment }}</td>
+            <td>{{ $testimonial->client_media }}</td>
+            <td>{{ $testimonial->client_image }}</td>
+            <td>{{ $testimonial->signature_image }}</td>
                 <td width="120">
-                    {!! Form::open(['route' => ['proftfolioCategories.destroy', $proftfolioCategory->id], 'method' => 'delete']) !!}
+                    {!! Form::open(['route' => ['admin.testimonials.destroy', $testimonial->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
-                        <a href="{{ route('proftfolioCategories.show', [$proftfolioCategory->id]) }}"
+                        <a href="{{ route('admin.testimonials.show', [$testimonial->id]) }}"
                            class='btn btn-default btn-xs'>
                             <i class="far fa-eye"></i>
                         </a>
-                        <a href="{{ route('proftfolioCategories.edit', [$proftfolioCategory->id]) }}"
+                        <a href="{{ route('admin.testimonials.edit', [$testimonial->id]) }}"
                            class='btn btn-default btn-xs'>
                             <i class="far fa-edit"></i>
                         </a>

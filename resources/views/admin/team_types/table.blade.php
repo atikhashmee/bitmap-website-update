@@ -13,13 +13,13 @@
                 <td>{{ $teamType->name }}</td>
             <td>{{ $teamType->description }}</td>
                 <td width="120">
-                    {!! Form::open(['route' => ['teamTypes.destroy', $teamType->id], 'method' => 'delete']) !!}
+                    {!! Form::open(['route' => ['admin.teamTypes.destroy', $teamType->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
-                        <a href="{{ route('teamTypes.show', [$teamType->id]) }}"
+                        <a href="{{ route('admin.teamTypes.show', [$teamType->id]) }}"
                            class='btn btn-default btn-xs'>
                             <i class="far fa-eye"></i>
                         </a>
-                        <a href="{{ route('teamTypes.edit', [$teamType->id]) }}"
+                        <a href="{{ route('admin.teamTypes.edit', [$teamType->id]) }}"
                            class='btn btn-default btn-xs'>
                             <i class="far fa-edit"></i>
                         </a>

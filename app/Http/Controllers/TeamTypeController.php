@@ -31,7 +31,7 @@ class TeamTypeController extends AppBaseController
     {
         $teamTypes = $this->teamTypeRepository->all();
 
-        return view('team_types.index')
+        return view('admin.team_types.index')
             ->with('teamTypes', $teamTypes);
     }
 
@@ -42,7 +42,7 @@ class TeamTypeController extends AppBaseController
      */
     public function create()
     {
-        return view('team_types.create');
+        return view('admin.team_types.create');
     }
 
     /**
@@ -60,7 +60,7 @@ class TeamTypeController extends AppBaseController
 
         Flash::success('Team Type saved successfully.');
 
-        return redirect(route('teamTypes.index'));
+        return redirect(route('admin.teamTypes.index'));
     }
 
     /**
@@ -77,10 +77,10 @@ class TeamTypeController extends AppBaseController
         if (empty($teamType)) {
             Flash::error('Team Type not found');
 
-            return redirect(route('teamTypes.index'));
+            return redirect(route('admin.teamTypes.index'));
         }
 
-        return view('team_types.show')->with('teamType', $teamType);
+        return view('admin.team_types.show')->with('teamType', $teamType);
     }
 
     /**
@@ -97,10 +97,10 @@ class TeamTypeController extends AppBaseController
         if (empty($teamType)) {
             Flash::error('Team Type not found');
 
-            return redirect(route('teamTypes.index'));
+            return redirect(route('admin.teamTypes.index'));
         }
 
-        return view('team_types.edit')->with('teamType', $teamType);
+        return view('admin.team_types.edit')->with('teamType', $teamType);
     }
 
     /**
@@ -118,14 +118,14 @@ class TeamTypeController extends AppBaseController
         if (empty($teamType)) {
             Flash::error('Team Type not found');
 
-            return redirect(route('teamTypes.index'));
+            return redirect(route('admin.teamTypes.index'));
         }
 
         $teamType = $this->teamTypeRepository->update($request->all(), $id);
 
         Flash::success('Team Type updated successfully.');
 
-        return redirect(route('teamTypes.index'));
+        return redirect(route('admin.teamTypes.index'));
     }
 
     /**
@@ -144,13 +144,13 @@ class TeamTypeController extends AppBaseController
         if (empty($teamType)) {
             Flash::error('Team Type not found');
 
-            return redirect(route('teamTypes.index'));
+            return redirect(route('admin.teamTypes.index'));
         }
 
         $this->teamTypeRepository->delete($id);
 
         Flash::success('Team Type deleted successfully.');
 
-        return redirect(route('teamTypes.index'));
+        return redirect(route('admin.teamTypes.index'));
     }
 }

@@ -5,11 +5,11 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Testimonials</h1>
+                    <h1>Proftfolio Categories</h1>
                 </div>
                 <div class="col-sm-6">
                     <a class="btn btn-primary float-right"
-                       href="{{ route('testimonials.create') }}">
+                       href="{{ route('admin.proftfolioCategories.create') }}">
                         Add New
                     </a>
                 </div>
@@ -25,7 +25,7 @@
 
         <div class="card">
             <div class="card-body p-0">
-                @include('testimonials.table')
+                @include('admin.proftfolio_categories.table')
 
                 <div class="card-footer clearfix">
                     <div class="float-right">

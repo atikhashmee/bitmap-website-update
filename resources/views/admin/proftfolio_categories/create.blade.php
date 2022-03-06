@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Create Team Member</h1>
+                    <h1>Create Proftfolio Category</h1>
                 </div>
             </div>
         </div>
@@ -17,19 +17,19 @@
 
         <div class="card">
 
-            {!! Form::open(['route' => 'teamMembers.store', 'files' => true]) !!}
+            {!! Form::open(['route' => 'admin.proftfolioCategories.store']) !!}
 
             <div class="card-body">
 
                 <div class="row">
-                    @include('team_members.fields')
+                    @include('admin.proftfolio_categories.fields')
                 </div>
 
             </div>
 
             <div class="card-footer">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('teamMembers.index') }}" class="btn btn-default">Cancel</a>
+                <a href="{{ route('admin.proftfolioCategories.index') }}" class="btn btn-default">Cancel</a>
             </div>
 
             {!! Form::close() !!}

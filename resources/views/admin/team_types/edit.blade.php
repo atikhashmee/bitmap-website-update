@@ -17,17 +17,17 @@
 
         <div class="card">
 
-            {!! Form::model($teamType, ['route' => ['teamTypes.update', $teamType->id], 'method' => 'patch']) !!}
+            {!! Form::model($teamType, ['route' => ['admin.teamTypes.update', $teamType->id], 'method' => 'patch']) !!}
 
             <div class="card-body">
                 <div class="row">
-                    @include('team_types.fields')
+                    @include('admin.team_types.fields')
                 </div>
             </div>
 
             <div class="card-footer">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('teamTypes.index') }}" class="btn btn-default">Cancel</a>
+                <a href="{{ route('admin.teamTypes.index') }}" class="btn btn-default">Cancel</a>
             </div>
 
             {!! Form::close() !!}

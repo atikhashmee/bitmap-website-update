@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Edit Proftfolio Category</h1>
+                    <h1>Edit Team Member</h1>
                 </div>
             </div>
         </div>
@@ -17,17 +17,17 @@
 
         <div class="card">
 
-            {!! Form::model($proftfolioCategory, ['route' => ['proftfolioCategories.update', $proftfolioCategory->id], 'method' => 'patch']) !!}
+            {!! Form::model($teamMember, ['route' => ['admin.teamMembers.update', $teamMember->id], 'method' => 'patch', 'files' => true]) !!}
 
             <div class="card-body">
                 <div class="row">
-                    @include('proftfolio_categories.fields')
+                    @include('admin.team_members.fields')
                 </div>
             </div>
 
             <div class="card-footer">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('proftfolioCategories.index') }}" class="btn btn-default">Cancel</a>
+                <a href="{{ route('admin.teamMembers.index') }}" class="btn btn-default">Cancel</a>
             </div>
 
             {!! Form::close() !!}

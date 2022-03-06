@@ -32,7 +32,7 @@ class SliderController extends AppBaseController
     {
         $sliders = $this->sliderRepository->all();
 
-        return view('sliders.index')
+        return view('admin.sliders.index')
             ->with('sliders', $sliders);
     }
 
@@ -43,7 +43,7 @@ class SliderController extends AppBaseController
      */
     public function create()
     {
-        return view('sliders.create');
+        return view('admin.sliders.create');
     }
 
     /**
@@ -67,7 +67,7 @@ class SliderController extends AppBaseController
         $slider->save();
         Flash::success('Slider saved successfully.');
 
-        return redirect(route('sliders.index'));
+        return redirect(route('admin.sliders.index'));
     }
 
     /**
@@ -84,10 +84,10 @@ class SliderController extends AppBaseController
         if (empty($slider)) {
             Flash::error('Slider not found');
 
-            return redirect(route('sliders.index'));
+            return redirect(route('admin.sliders.index'));
         }
 
-        return view('sliders.show')->with('slider', $slider);
+        return view('admin.sliders.show')->with('slider', $slider);
     }
 
     /**
@@ -104,10 +104,10 @@ class SliderController extends AppBaseController
         if (empty($slider)) {
             Flash::error('Slider not found');
 
-            return redirect(route('sliders.index'));
+            return redirect(route('admin.sliders.index'));
         }
 
-        return view('sliders.edit')->with('slider', $slider);
+        return view('admin.sliders.edit')->with('slider', $slider);
     }
 
     /**
@@ -125,14 +125,14 @@ class SliderController extends AppBaseController
         if (empty($slider)) {
             Flash::error('Slider not found');
 
-            return redirect(route('sliders.index'));
+            return redirect(route('admin.sliders.index'));
         }
 
         $slider = $this->sliderRepository->update($request->all(), $id);
 
         Flash::success('Slider updated successfully.');
 
-        return redirect(route('sliders.index'));
+        return redirect(route('admin.sliders.index'));
     }
 
     /**
@@ -151,7 +151,7 @@ class SliderController extends AppBaseController
         if (empty($slider)) {
             Flash::error('Slider not found');
 
-            return redirect(route('sliders.index'));
+            return redirect(route('admin.sliders.index'));
         }
 
         $this->sliderRepository->delete($id);

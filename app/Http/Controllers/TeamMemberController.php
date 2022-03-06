@@ -32,7 +32,7 @@ class TeamMemberController extends AppBaseController
     {
         $teamMembers = $this->teamMemberRepository->all();
 
-        return view('team_members.index')
+        return view('admin.team_members.index')
             ->with('teamMembers', $teamMembers);
     }
 
@@ -43,7 +43,7 @@ class TeamMemberController extends AppBaseController
      */
     public function create()
     {
-        return view('team_members.create');
+        return view('admin.team_members.create');
     }
 
     /**
@@ -56,19 +56,17 @@ class TeamMemberController extends AppBaseController
     public function store(CreateTeamMemberRequest $request)
     {
         $input = $request->all();
-
         $teamMember = $this->teamMemberRepository->create($input);
-
         if ($request->hasFile('image')) {
-            $file = MediaUploader::imageUpload($request->image, 'team_members', 1, null, [600, 600]);
+            $file = MediaUploader::imageUpload($request->image, 'team_members', 0);
             if ($file) {
-                $teamMember->fill(['image' => $file['url']]);
+                $teamMember->fill(['image' => $file['name']]);
             }
         }
         $teamMember->save();
         Flash::success('Team Member saved successfully.');
 
-        return redirect(route('teamMembers.index'));
+        return redirect(route('admin.teamMembers.index'));
     }
 
     /**
@@ -85,10 +83,10 @@ class TeamMemberController extends AppBaseController
         if (empty($teamMember)) {
             Flash::error('Team Member not found');
 
-            return redirect(route('teamMembers.index'));
+            return redirect(route('admin.teamMembers.index'));
         }
 
-        return view('team_members.show')->with('teamMember', $teamMember);
+        return view('admin.team_members.show')->with('teamMember', $teamMember);
     }
 
     /**
@@ -105,10 +103,10 @@ class TeamMemberController extends AppBaseController
         if (empty($teamMember)) {
             Flash::error('Team Member not found');
 
-            return redirect(route('teamMembers.index'));
+            return redirect(route('admin.teamMembers.index'));
         }
 
-        return view('team_members.edit')->with('teamMember', $teamMember);
+        return view('admin.team_members.edit')->with('teamMember', $teamMember);
     }
 
     /**
@@ -122,18 +120,25 @@ class TeamMemberController extends AppBaseController
     public function update($id, UpdateTeamMemberRequest $request)
     {
         $teamMember = $this->teamMemberRepository->find($id);
-
+        $input = $request->all();
         if (empty($teamMember)) {
             Flash::error('Team Member not found');
-
-            return redirect(route('teamMembers.index'));
+            return redirect(route('admin.teamMembers.index'));
         }
 
-        $teamMember = $this->teamMemberRepository->update($request->all(), $id);
+        if ($request->hasFile('image')) {
+            MediaUploader::delete('team_members', $teamMember->image);
+            $file = MediaUploader::imageUpload($request->image, 'team_members', 0);
+            if ($file) {
+                $input['image'] = $file['name'];
+            }
+        }
+
+        $teamMember = $this->teamMemberRepository->update($input, $id);
 
         Flash::success('Team Member updated successfully.');
 
-        return redirect(route('teamMembers.index'));
+        return redirect(route('admin.teamMembers.index'));
     }
 
     /**
@@ -148,17 +153,14 @@ class TeamMemberController extends AppBaseController
     public function destroy($id)
     {
         $teamMember = $this->teamMemberRepository->find($id);
-
         if (empty($teamMember)) {
             Flash::error('Team Member not found');
-
-            return redirect(route('teamMembers.index'));
+            return redirect(route('admin.teamMembers.index'));
         }
 
+        MediaUploader::delete('team_members', $teamMember->image);
         $this->teamMemberRepository->delete($id);
-
         Flash::success('Team Member deleted successfully.');
-
-        return redirect(route('teamMembers.index'));
+        return redirect(route('admin.teamMembers.index'));
     }
 }

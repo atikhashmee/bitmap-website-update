@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Create Testimonial</h1>
+                    <h1>Edit Proftfolio Category</h1>
                 </div>
             </div>
         </div>
@@ -17,19 +17,17 @@
 
         <div class="card">
 
-            {!! Form::open(['route' => 'testimonials.store', 'files' => true]) !!}
+            {!! Form::model($proftfolioCategory, ['route' => ['admin.proftfolioCategories.update', $proftfolioCategory->id], 'method' => 'patch']) !!}
 
             <div class="card-body">
-
                 <div class="row">
-                    @include('testimonials.fields')
+                    @include('admin.proftfolio_categories.fields')
                 </div>
-
             </div>
 
             <div class="card-footer">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('testimonials.index') }}" class="btn btn-default">Cancel</a>
+                <a href="{{ route('admin.proftfolioCategories.index') }}" class="btn btn-default">Cancel</a>
             </div>
 
             {!! Form::close() !!}

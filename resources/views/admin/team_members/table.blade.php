@@ -31,13 +31,13 @@
             <td>{{ $teamMember->instagram }}</td>
             <td>{{ $teamMember->image }}</td>
                 <td width="120">
-                    {!! Form::open(['route' => ['teamMembers.destroy', $teamMember->id], 'method' => 'delete']) !!}
+                    {!! Form::open(['route' => ['admin.teamMembers.destroy', $teamMember->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
-                        <a href="{{ route('teamMembers.show', [$teamMember->id]) }}"
+                        <a href="{{ route('admin.teamMembers.show', [$teamMember->id]) }}"
                            class='btn btn-default btn-xs'>
                             <i class="far fa-eye"></i>
                         </a>
-                        <a href="{{ route('teamMembers.edit', [$teamMember->id]) }}"
+                        <a href="{{ route('admin.teamMembers.edit', [$teamMember->id]) }}"
                            class='btn btn-default btn-xs'>
                             <i class="far fa-edit"></i>
                         </a>

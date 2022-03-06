@@ -32,7 +32,7 @@ class TestimonialController extends AppBaseController
     {
         $testimonials = $this->testimonialRepository->all();
 
-        return view('testimonials.index')
+        return view('admin.testimonials.index')
             ->with('testimonials', $testimonials);
     }
 
@@ -43,7 +43,7 @@ class TestimonialController extends AppBaseController
      */
     public function create()
     {
-        return view('testimonials.create');
+        return view('admin.testimonials.create');
     }
 
     /**
@@ -56,26 +56,25 @@ class TestimonialController extends AppBaseController
     public function store(CreateTestimonialRequest $request)
     {
         $input = $request->all();
-
         $testimonial = $this->testimonialRepository->create($input);
 
         if ($request->hasFile('client_image')) {
-            $file = MediaUploader::imageUpload($request->client_image, 'testimonial', 1, null, [600, 600]);
+            $file = MediaUploader::imageUpload($request->client_image, 'testimonial', 0);
             if ($file) {
-                $testimonial->fill(['client_image' => $file['url']]);
+                $testimonial->fill(['client_image' => $file['name']]);
             }
         }
 
         if ($request->hasFile('signature_image')) {
-            $file = MediaUploader::imageUpload($request->signature_image, 'testimonial', 1, null, [600, 600]);
+            $file = MediaUploader::imageUpload($request->signature_image, 'testimonial', 0);
             if ($file) {
-                $testimonial->fill(['signature_image' => $file['url']]);
+                $testimonial->fill(['signature_image' => $file['name']]);
             }
         }
         $testimonial->save();
-        Flash::success('Testimonial saved successfully.');
 
-        return redirect(route('testimonials.index'));
+        Flash::success('Testimonial saved successfully.');
+        return redirect(route('admin.testimonials.index'));
     }
 
     /**
@@ -88,14 +87,12 @@ class TestimonialController extends AppBaseController
     public function show($id)
     {
         $testimonial = $this->testimonialRepository->find($id);
-
         if (empty($testimonial)) {
             Flash::error('Testimonial not found');
-
-            return redirect(route('testimonials.index'));
+            return redirect(route('admin.testimonials.index'));
         }
 
-        return view('testimonials.show')->with('testimonial', $testimonial);
+        return view('admin.testimonials.show')->with('testimonial', $testimonial);
     }
 
     /**
@@ -108,14 +105,12 @@ class TestimonialController extends AppBaseController
     public function edit($id)
     {
         $testimonial = $this->testimonialRepository->find($id);
-
         if (empty($testimonial)) {
             Flash::error('Testimonial not found');
-
-            return redirect(route('testimonials.index'));
+            return redirect(route('admin.testimonials.index'));
         }
 
-        return view('testimonials.edit')->with('testimonial', $testimonial);
+        return view('admin.testimonials.edit')->with('testimonial', $testimonial);
     }
 
     /**
@@ -130,17 +125,32 @@ class TestimonialController extends AppBaseController
     {
         $testimonial = $this->testimonialRepository->find($id);
 
+        $input = $request->all();
+
         if (empty($testimonial)) {
             Flash::error('Testimonial not found');
-
-            return redirect(route('testimonials.index'));
+            return redirect(route('admin.testimonials.index'));
         }
 
-        $testimonial = $this->testimonialRepository->update($request->all(), $id);
+        if ($request->hasFile('client_image')) {
+            MediaUploader::delete('testimonial', $testimonial->client_image);
+            $file = MediaUploader::imageUpload($request->client_image, 'testimonial', 0);
+            if ($file) {
+                $input['client_image'] = $file['name'];
+            }
+        }
 
+        if ($request->hasFile('signature_image')) {
+            MediaUploader::delete('testimonial', $testimonial->signature_image);
+            $file = MediaUploader::imageUpload($request->signature_image, 'testimonial', 0);
+            if ($file) {
+                $input['signature_image'] = $file['name'];
+            }
+        }
+
+        $testimonial = $this->testimonialRepository->update($input, $id);
         Flash::success('Testimonial updated successfully.');
-
-        return redirect(route('testimonials.index'));
+        return redirect(route('admin.testimonials.index'));
     }
 
     /**
@@ -158,14 +168,15 @@ class TestimonialController extends AppBaseController
 
         if (empty($testimonial)) {
             Flash::error('Testimonial not found');
-
-            return redirect(route('testimonials.index'));
+            return redirect(route('admin.testimonials.index'));
         }
 
+
+        MediaUploader::delete('testimonial', $testimonial->client_image);
+        MediaUploader::delete('testimonial', $testimonial->signature_image);
+        
         $this->testimonialRepository->delete($id);
-
         Flash::success('Testimonial deleted successfully.');
-
-        return redirect(route('testimonials.index'));
+        return redirect(route('admin.testimonials.index'));
     }
 }

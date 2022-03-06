@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Edit Team Member</h1>
+                    <h1>Create Team Member</h1>
                 </div>
             </div>
         </div>
@@ -17,17 +17,19 @@
 
         <div class="card">
 
-            {!! Form::model($teamMember, ['route' => ['teamMembers.update', $teamMember->id], 'method' => 'patch', 'files' => true]) !!}
+            {!! Form::open(['route' => 'admin.teamMembers.store', 'files' => true]) !!}
 
             <div class="card-body">
+
                 <div class="row">
-                    @include('team_members.fields')
+                    @include('admin.team_members.fields')
                 </div>
+
             </div>
 
             <div class="card-footer">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('teamMembers.index') }}" class="btn btn-default">Cancel</a>
+                <a href="{{ route('admin.teamMembers.index') }}" class="btn btn-default">Cancel</a>
             </div>
 
             {!! Form::close() !!}

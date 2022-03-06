@@ -31,7 +31,7 @@ class ProftfolioCategoryController extends AppBaseController
     {
         $proftfolioCategories = $this->proftfolioCategoryRepository->all();
 
-        return view('proftfolio_categories.index')
+        return view('admin.proftfolio_categories.index')
             ->with('proftfolioCategories', $proftfolioCategories);
     }
 
@@ -42,7 +42,7 @@ class ProftfolioCategoryController extends AppBaseController
      */
     public function create()
     {
-        return view('proftfolio_categories.create');
+        return view('admin.proftfolio_categories.create');
     }
 
     /**
@@ -60,7 +60,7 @@ class ProftfolioCategoryController extends AppBaseController
 
         Flash::success('Proftfolio Category saved successfully.');
 
-        return redirect(route('proftfolioCategories.index'));
+        return redirect(route('admin.proftfolioCategories.index'));
     }
 
     /**
@@ -77,10 +77,10 @@ class ProftfolioCategoryController extends AppBaseController
         if (empty($proftfolioCategory)) {
             Flash::error('Proftfolio Category not found');
 
-            return redirect(route('proftfolioCategories.index'));
+            return redirect(route('admin.proftfolioCategories.index'));
         }
 
-        return view('proftfolio_categories.show')->with('proftfolioCategory', $proftfolioCategory);
+        return view('admin.proftfolio_categories.show')->with('proftfolioCategory', $proftfolioCategory);
     }
 
     /**
@@ -97,10 +97,10 @@ class ProftfolioCategoryController extends AppBaseController
         if (empty($proftfolioCategory)) {
             Flash::error('Proftfolio Category not found');
 
-            return redirect(route('proftfolioCategories.index'));
+            return redirect(route('admin.proftfolioCategories.index'));
         }
 
-        return view('proftfolio_categories.edit')->with('proftfolioCategory', $proftfolioCategory);
+        return view('admin.proftfolio_categories.edit')->with('proftfolioCategory', $proftfolioCategory);
     }
 
     /**
@@ -118,14 +118,14 @@ class ProftfolioCategoryController extends AppBaseController
         if (empty($proftfolioCategory)) {
             Flash::error('Proftfolio Category not found');
 
-            return redirect(route('proftfolioCategories.index'));
+            return redirect(route('admin.proftfolioCategories.index'));
         }
 
         $proftfolioCategory = $this->proftfolioCategoryRepository->update($request->all(), $id);
 
         Flash::success('Proftfolio Category updated successfully.');
 
-        return redirect(route('proftfolioCategories.index'));
+        return redirect(route('admin.proftfolioCategories.index'));
     }
 
     /**
@@ -144,13 +144,13 @@ class ProftfolioCategoryController extends AppBaseController
         if (empty($proftfolioCategory)) {
             Flash::error('Proftfolio Category not found');
 
-            return redirect(route('proftfolioCategories.index'));
+            return redirect(route('admin.proftfolioCategories.index'));
         }
 
         $this->proftfolioCategoryRepository->delete($id);
 
         Flash::success('Proftfolio Category deleted successfully.');
 
-        return redirect(route('proftfolioCategories.index'));
+        return redirect(route('admin.proftfolioCategories.index'));
     }
 }

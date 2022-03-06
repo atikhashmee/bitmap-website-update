@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Create Team Type</h1>
+                    <h1>Edit Testimonial</h1>
                 </div>
             </div>
         </div>
@@ -17,19 +17,17 @@
 
         <div class="card">
 
-            {!! Form::open(['route' => 'teamTypes.store']) !!}
+            {!! Form::model($testimonial, ['route' => ['admin.testimonials.update', $testimonial->id], 'method' => 'patch', 'files' => true]) !!}
 
             <div class="card-body">
-
                 <div class="row">
-                    @include('team_types.fields')
+                    @include('admin.testimonials.fields')
                 </div>
-
             </div>
 
             <div class="card-footer">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('teamTypes.index') }}" class="btn btn-default">Cancel</a>
+                <a href="{{ route('admin.testimonials.index') }}" class="btn btn-default">Cancel</a>
             </div>
 
             {!! Form::close() !!}
