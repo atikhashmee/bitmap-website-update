@@ -62,3 +62,12 @@
 </li>
 
 
+
+<li class="nav-item">
+    <a href="{{ route('protfolioItems.index') }}"
+       class="nav-link {{ Request::is('protfolioItems*') ? 'active' : '' }}">
+        <p>Protfolio Items</p>
+    </a>
+</li>
+
+

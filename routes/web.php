@@ -43,3 +43,20 @@ Route::post('/home-styles/{id}', "Webcontroller@updateHomeStyle")->name('update_
 //   app setting
 Route::get('Settings', "Webcontroller@showSettingPage")->name('setting_page');
 Route::post('update-Settings', "Webcontroller@updateSettingPage")->name('update_setting_page');
+
+
+
+
+Route::resource('protfolioItems', 'ProtfolioItemController');
+
+Route::group(['prefix' => 'protfolio', 'as' => 'protfolio.'], function() {
+
+    Route::group(['prefix' => 'images', 'as' => 'images.'], function() {
+        Route::get('{id}', 'ProtfolioController@getProtfolioImages')->name('create');
+        Route::post('saveImgage', "ProtfolioController@saveImages")->name('store');
+        Route::delete('deleteImg/{id}', "ProtfolioController@deleteImages")->name('delete');
+    });
+    
+});
+
+

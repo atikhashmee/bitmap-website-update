@@ -1,0 +1,101 @@
+[
+    {
+        "name": "id",
+        "dbType": "id",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": true,
+        "inForm": false,
+        "inIndex": false,
+        "inView": false
+    },
+    {
+        "name": "project_title",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": true
+    },
+    {
+        "name": "proftfolio_category_id",
+        "dbType": "integer:unsigned:foreign,proftfolio_categories,id",
+        "htmlType": "selectTable:proftfolio_categories:name,id",
+        "searchable": true,
+        "relation": "mt1,ProftfolioCategory,proftfolio_category_id,id"
+    },
+    {
+        "name": "about_project",
+        "dbType": "text:nullable",
+        "htmlType": "textarea",
+        "searchable": true
+    },
+    {
+        "name": "detail_description",
+        "dbType": "text:nullable",
+        "htmlType": "textarea",
+        "searchable": true
+    },
+    {
+        "name": "project_date",
+        "dbType": "dateTime",
+        "htmlType": "date",
+        "searchable": true
+    },
+    {
+        "name": "client",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": true
+    },
+    {
+        "name": "project_location",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": true
+    },
+    {
+        "name": "video_demo_link",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": true
+    },
+    {
+        "name": "video_description",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": true
+    },
+    {
+        "name": "image",
+        "dbType": "string:nullable",
+        "htmlType": "file"
+    },
+    {
+        "name": "created_at",
+        "dbType": "timestamp",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": false,
+        "inIndex": false
+    },
+    {
+        "name": "updated_at",
+        "dbType": "timestamp",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": false,
+        "inIndex": false
+    }
+]
