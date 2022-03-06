@@ -1,0 +1,104 @@
+[
+    {
+        "name": "id",
+        "dbType": "id",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": true,
+        "inForm": false,
+        "inIndex": false,
+        "inView": false
+    },
+    {
+        "name": "name",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": true
+    },
+    {
+        "name": "team_type_id",
+        "dbType": "integer:unsigned:foreign,team_types,id",
+        "htmlType": "selectTable:team_types:name,id",
+        "searchable": true,
+        "relation": "mt1,TeamType,team_type_id,id"
+    },
+    {
+        "name": "designation",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": true
+    },
+    {
+        "name": "description",
+        "dbType": "text:nullable",
+        "htmlType": "textarea",
+        "searchable": true
+    },
+    {
+        "name": "email",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": true
+    },
+    {
+        "name": "status",
+        "dbType": "enum,Active,On Leave, Left:default,'Active'",
+        "htmlType": "select,Active,On Leave, Left",
+        "searchable": true
+    },
+    {
+        "name": "is_private",
+        "dbType": "boolean",
+        "htmlType": "checkbox,1"
+    },
+    {
+        "name": "linkedin",
+        "dbType": "string:nullable",
+        "htmlType": "text",
+        "searchable": true
+    },
+    {
+        "name": "twitter",
+        "dbType": "string:nullable",
+        "htmlType": "text",
+        "searchable": true
+    },
+    {
+        "name": "instagram",
+        "dbType": "string:nullable",
+        "htmlType": "text",
+        "searchable": true
+    },
+    {
+        "name": "image",
+        "dbType": "string:nullable",
+        "htmlType": "file"
+    },
+    {
+        "name": "created_at",
+        "dbType": "timestamp",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": false,
+        "inIndex": false
+    },
+    {
+        "name": "updated_at",
+        "dbType": "timestamp",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": false,
+        "inIndex": false
+    }
+]
