@@ -13,9 +13,44 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'SiteController@index');
+Route::get('/About', 'SiteController@about');
+
+
+  Route::any('/Protfolio', function () {
+       return view("site.protfolio_dashboard")
+       ->with('Protfolios',Protfolio::all())
+       ->with("Protfoliobg",ProtfolioBg::firstOrFail())
+       ->with("pcate",ProtfolioCategory::all())
+       ->with("settings", AppSetting::first());
+  }); 
+
+  Route::any('Protfolio/show/{id}', function ($id) {
+          //dd( ProtfolioImage::where("protfolios_id",$id)->get());
+        return view("site.single_protfolio")
+        ->with("details", Protfolio::find($id))
+        ->with("faqs",ProtfolioFaq::where("protfolios_id",$id)->get())
+        ->with("images", ProtfolioImage::where( "protfolios_id",$id)->get())
+        ->with("settings", AppSetting::first());
+  });
+
+  Route::any('/ContactUs', function () {
+       return view("site.contact")
+       ->with("contact", ContactForm::first())
+       ->with("settings", AppSetting::first());
+  });
+
+  
+
+  Route::any('Service', function () {
+      return view("site.service-n")
+      ->with("settings", AppSetting::first())
+      ->with('serviceBg', App\ServiceBg::first())
+      ->with('listsServices',App\ServicesLists::all())
+      ->with("clients",App\ClientsLists::where('status',1)->get())
+      ->with('servicesTop', App\ServiceHolder::all());
+    
+  });
 
 
 Auth::routes(['verify' => true]);

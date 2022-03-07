@@ -11,33 +11,14 @@ class HomeStyelSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('home_styles')->insert([
-            "home_style_title" => "default_home",
-            "status" => 0,
-            "created_at" => now()
-        ]);
-
-        DB::table('home_styles')->insert([
-            "home_style_title" => "home2",
-            "status" => 0,
-            "created_at" => now()
-        ]);
-        DB::table('home_styles')->insert([
-            "home_style_title" => "home5",
-            "status" => 0,
-            "created_at" => now()
-        ]);
-        DB::table('home_styles')->insert([
-            "home_style_title" => "home6",
-            "status" => 0,
-            "created_at" => now()
-        ]);
-
-        DB::table('home_styles')->insert([
-            "home_style_title" => "home8",
-            "status" => 0,
-            "created_at" => now()
-        ]);
-        
+        $home_style_arr = [];
+        for ($i=0; $i < 5; $i++) { 
+            $home_style_arr[] = [
+                "home_style_title" => "home".$i,
+                "status" => 0,
+                "created_at" => now()
+            ];
+        }
+        \DB::table('home_styles')->insert($home_style_arr);
     }
 }
