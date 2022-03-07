@@ -32,7 +32,7 @@ class ProtfolioItemController extends AppBaseController
     {
         $protfolioItems = $this->protfolioItemRepository->all();
 
-        return view('protfolio_items.index')
+        return view('admin.protfolio_items.index')
             ->with('protfolioItems', $protfolioItems);
     }
 
@@ -43,7 +43,7 @@ class ProtfolioItemController extends AppBaseController
      */
     public function create()
     {
-        return view('protfolio_items.create');
+        return view('admin.protfolio_items.create');
     }
 
     /**
@@ -59,15 +59,15 @@ class ProtfolioItemController extends AppBaseController
 
         $protfolioItem = $this->protfolioItemRepository->create($input);
         if ($request->hasFile('image')) {
-            $file = MediaUploader::imageUpload($request->image, 'protfolios', 1, null, [600, 600]);
+            $file = MediaUploader::imageUpload($request->image, 'protfolios', 0);
             if ($file) {
-                $protfolioItem->fill(['image' => $file['url']]);
+                $protfolioItem->fill(['image' => $file['name']]);
             }
         }
         $protfolioItem->save();
         Flash::success('Protfolio Item saved successfully.');
 
-        return redirect(route('protfolioItems.index'));
+        return redirect(route('admin.protfolioItems.index'));
     }
 
     /**
@@ -80,14 +80,12 @@ class ProtfolioItemController extends AppBaseController
     public function show($id)
     {
         $protfolioItem = $this->protfolioItemRepository->find($id);
-
         if (empty($protfolioItem)) {
             Flash::error('Protfolio Item not found');
-
-            return redirect(route('protfolioItems.index'));
+            return redirect(route('admin.protfolioItems.index'));
         }
 
-        return view('protfolio_items.show')->with('protfolioItem', $protfolioItem);
+        return view('admin.protfolio_items.show')->with('protfolioItem', $protfolioItem);
     }
 
     /**
@@ -103,11 +101,10 @@ class ProtfolioItemController extends AppBaseController
 
         if (empty($protfolioItem)) {
             Flash::error('Protfolio Item not found');
-
-            return redirect(route('protfolioItems.index'));
+            return redirect(route('admin.protfolioItems.index'));
         }
 
-        return view('protfolio_items.edit')->with('protfolioItem', $protfolioItem);
+        return view('admin.protfolio_items.edit')->with('protfolioItem', $protfolioItem);
     }
 
     /**
@@ -121,18 +118,23 @@ class ProtfolioItemController extends AppBaseController
     public function update($id, UpdateProtfolioItemRequest $request)
     {
         $protfolioItem = $this->protfolioItemRepository->find($id);
-
+        $input = $request->all();
         if (empty($protfolioItem)) {
             Flash::error('Protfolio Item not found');
-
-            return redirect(route('protfolioItems.index'));
+            return redirect(route('admin.protfolioItems.index'));
         }
 
-        $protfolioItem = $this->protfolioItemRepository->update($request->all(), $id);
+        if ($request->hasFile('image')) {
+            MediaUploader::delete('protfolios', $protfolioItem->image);
+            $file = MediaUploader::imageUpload($request->image, 'protfolios', 0);
+            if ($file) {
+                $input['image'] = $file['name'];
+            }
+        }
 
+        $protfolioItem = $this->protfolioItemRepository->update($input, $id);
         Flash::success('Protfolio Item updated successfully.');
-
-        return redirect(route('protfolioItems.index'));
+        return redirect(route('admin.protfolioItems.index'));
     }
 
     /**
@@ -150,14 +152,13 @@ class ProtfolioItemController extends AppBaseController
 
         if (empty($protfolioItem)) {
             Flash::error('Protfolio Item not found');
-
-            return redirect(route('protfolioItems.index'));
+            return redirect(route('admin.protfolioItems.index'));
         }
-
+        MediaUploader::delete('protfolios', $protfolioItem->image);
         $this->protfolioItemRepository->delete($id);
 
         Flash::success('Protfolio Item deleted successfully.');
 
-        return redirect(route('protfolioItems.index'));
+        return redirect(route('admin.protfolioItems.index'));
     }
 }

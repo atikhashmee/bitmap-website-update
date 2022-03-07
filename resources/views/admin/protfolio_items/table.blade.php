@@ -29,16 +29,16 @@
                 <td>{{ $protfolioItem->video_description }}</td>
                 <td>
                     <img src="{{ $protfolioItem->image }}" width="20"  height="20" alt="">
-                    <a href="{{route('protfolio.images.create', ['id' => $protfolioItem->id ])}}">Other Images</a>
+                    <a href="{{route('admin.protfolio.images.create', ['id' => $protfolioItem->id ])}}">Other Images</a>
                 </td>
                 <td width="120">
-                    {!! Form::open(['route' => ['protfolioItems.destroy', $protfolioItem->id], 'method' => 'delete']) !!}
+                    {!! Form::open(['route' => ['admin.protfolioItems.destroy', $protfolioItem->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
-                        <a href="{{ route('protfolioItems.show', [$protfolioItem->id]) }}"
+                        <a href="{{ route('admin.protfolioItems.show', [$protfolioItem->id]) }}"
                             class='btn btn-default btn-xs'>
                             <i class="far fa-eye"></i>
                         </a>
-                        <a href="{{ route('protfolioItems.edit', [$protfolioItem->id]) }}"
+                        <a href="{{ route('admin.protfolioItems.edit', [$protfolioItem->id]) }}"
                             class='btn btn-default btn-xs'>
                             <i class="far fa-edit"></i>
                         </a>

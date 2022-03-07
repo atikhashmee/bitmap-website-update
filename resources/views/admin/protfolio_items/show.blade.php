@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-sm-6">
                     <a class="btn btn-default float-right"
-                       href="{{ route('protfolioItems.index') }}">
+                       href="{{ route('admin.protfolioItems.index') }}">
                         Back
                     </a>
                 </div>
@@ -21,7 +21,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="row">
-                    @include('protfolio_items.show_fields')
+                    @include('admin.protfolio_items.show_fields')
                 </div>
             </div>
         </div>

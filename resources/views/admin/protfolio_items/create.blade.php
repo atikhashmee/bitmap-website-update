@@ -17,19 +17,19 @@
 
         <div class="card">
 
-            {!! Form::open(['route' => 'protfolioItems.store', 'files' => true]) !!}
+            {!! Form::open(['route' => 'admin.protfolioItems.store', 'files' => true]) !!}
 
             <div class="card-body">
 
                 <div class="row">
-                    @include('protfolio_items.fields')
+                    @include('admin.protfolio_items.fields')
                 </div>
 
             </div>
 
             <div class="card-footer">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('protfolioItems.index') }}" class="btn btn-default">Cancel</a>
+                <a href="{{ route('admin.protfolioItems.index') }}" class="btn btn-default">Cancel</a>
             </div>
 
             {!! Form::close() !!}
