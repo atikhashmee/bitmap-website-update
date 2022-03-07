@@ -42,6 +42,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
     Route::post('update-Settings', "Webcontroller@updateSettingPage")->name('update_setting_page');
     Route::resource('protfolioItems', 'ProtfolioItemController');
     Route::group(['prefix' => 'protfolio', 'as' => 'protfolio.'], function() {
+        Route::post('save-bg-info', "ProtfolioController@updateBackgroundInfo")->name('Savepbginfo');
         Route::group(['prefix' => 'images', 'as' => 'images.'], function() {
             Route::get('{id}', 'ProtfolioController@getProtfolioImages')->name('create');
             Route::post('saveImgage', "ProtfolioController@saveImages")->name('store');

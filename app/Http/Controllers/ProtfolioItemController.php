@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Flash;
 use Response;
+use App\Models\ProtfolioBg;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use App\Repositories\ProtfolioItemRepository;
@@ -31,8 +32,14 @@ class ProtfolioItemController extends AppBaseController
     public function index(Request $request)
     {
         $protfolioItems = $this->protfolioItemRepository->all();
-
+        $prot = ProtfolioBg::find(1);
+        if ($prot == null ) {
+            ProtfolioBg::firstOrCreate(
+                ['bg_title' => 'Bitmap work History']
+            );
+        }
         return view('admin.protfolio_items.index')
+            ->with("bginfo", ProtfolioBg::first())
             ->with('protfolioItems', $protfolioItems);
     }
 

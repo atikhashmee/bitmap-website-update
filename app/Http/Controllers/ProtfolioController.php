@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProtfolioBg;
 use Illuminate\Http\Request;
 use App\Models\ProtfolioImage;
 use Sudip\MediaUploder\Facades\MediaUploader;
@@ -43,5 +44,27 @@ class ProtfolioController extends Controller
         MediaUploader::delete('protfolio_image', $imges->images);
         $imges->delete();
         return redirect()->back()->withStatus("Image has been deleted");
+    }
+
+
+    public function updateBackgroundInfo(Request $request) {
+        $bgimage = "";
+        $protfoliobg = ProtfolioBg::find(1);
+        if ($request->hasFile('bgimgfile')) {
+            MediaUploader::delete('website', $protfoliobg->bg_image);
+            $file = MediaUploader::imageUpload($request->bgimgfile, 'website', 0);
+            if ($file) {
+                $bgimage = $file['name'];
+            }
+        } else {
+            $bgimage = $protfoliobg->bg_image;
+        }
+
+        ProtfolioBg::where('id', 1)->update([
+            'bg_title' => $request->input("headertitle"),
+            'bg_description' => $request->input("bgdescription"),
+            'bg_image' => $bgimage
+        ]);
+       return redirect()->back()->withStatus("Background information has been updated");
     }
 }
