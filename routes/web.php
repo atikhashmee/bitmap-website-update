@@ -47,8 +47,16 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
             Route::post('saveImgage', "ProtfolioController@saveImages")->name('store');
             Route::delete('deleteImg/{id}', "ProtfolioController@deleteImages")->name('delete');
         });
+        Route::group(['prefix' => '{protfolio_id}'], function() {
+            Route::resource('protfolioFaqs', 'ProtfolioFaqController');
+        });
     });
+    
 });
+
+
+
+
 
 
 

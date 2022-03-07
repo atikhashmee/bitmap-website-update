@@ -30,6 +30,7 @@
                 <td>
                     <img src="{{ $protfolioItem->image }}" width="20"  height="20" alt="">
                     <a href="{{route('admin.protfolio.images.create', ['id' => $protfolioItem->id ])}}">Other Images</a>
+                    <a href="{{route('admin.protfolio.protfolioFaqs.index', ['protfolio_id' => $protfolioItem->id ])}}">Faq</a>
                 </td>
                 <td width="120">
                     {!! Form::open(['route' => ['admin.protfolioItems.destroy', $protfolioItem->id], 'method' => 'delete']) !!}
