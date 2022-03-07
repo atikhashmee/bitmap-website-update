@@ -32,7 +32,7 @@
                       @endif
                     </div>
                     <div class="card-footer">
-                      <form method="post" action="{{ route("update_home_style", ['id' => 2]) }}">
+                      <form method="post" action="{{ route("admin.update_home_style", ['id' => 2]) }}">
                       @csrf
                         <button type="submit" class="btn btn-outline-primary">Active</button>
                       </form>
@@ -50,7 +50,7 @@
                       @endif
                     </div>
                     <div class="card-footer">
-                      <form method="post" action="{{ route("update_home_style", ['id' => 3])  }}">
+                      <form method="post" action="{{ route("admin.update_home_style", ['id' => 3])  }}">
                         @csrf
                           <button type="submit" class="btn btn-outline-primary">Active</button>
                       </form>
@@ -68,7 +68,7 @@
                       @endif
                     </div>
                     <div class="card-footer">
-                      <form method="post" action="{{ route("update_home_style", ['id' => 4])  }}">
+                      <form method="post" action="{{ route("admin.update_home_style", ['id' => 4])  }}">
                       @csrf
                         <button type="submit" class="btn btn-outline-primary">Active</button>
                       </form>
@@ -86,7 +86,7 @@
                       @endif
                     </div>
                     <div class="card-footer">
-                      <form method="post" action="{{ route("update_home_style", ['id' => 5]) }}">
+                      <form method="post" action="{{ route("admin.update_home_style", ['id' => 5]) }}">
                       @csrf
                         <button type="submit" class="btn btn-outline-primary">Active</button>
                       </form>
@@ -104,7 +104,7 @@
                       @endif
                     </div>
                     <div class="card-footer">
-                      <form method="post" action="{{ route("update_home_style", ['id' => 1]) }}">
+                      <form method="post" action="{{ route("admin.update_home_style", ['id' => 1]) }}">
                         @csrf
                           <button type="submit" class="btn btn-outline-primary">Active</button>
                       </form>

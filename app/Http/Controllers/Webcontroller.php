@@ -7,6 +7,7 @@ use App\Models\HomeStyle;
 use App\Models\AppSetting;
 use App\Models\ContactForm;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Sudip\MediaUploder\Facades\MediaUploader;
 
 class Webcontroller extends Controller
@@ -55,7 +56,17 @@ class Webcontroller extends Controller
 
 
     public function showHomeStyle() {
-        return view("home_style.index", ['homestyles' => HomeStyle::where('status', 1)->first()]);
+         //check if the database is empty with any records
+        $homestyles = HomeStyle::where("status", 1);
+        if ($homestyles->count() == 0 || $homestyles->get() == null) {
+                Artisan::call('db:seed', [
+                    '--class' => 'HomeStyelSeeder'
+                ]);
+                $homestyleobj  = HomeStyle::first(); //update the first record so that it shows the active result 
+                $homestyleobj->status = "1";
+                $homestyleobj->save();
+        }
+        return view("admin.home_style.index", ['homestyles' => HomeStyle::where('status', 1)->first()]);
     }
 
     public function updateHomeStyle(Request $request, $id) {
@@ -116,7 +127,7 @@ class Webcontroller extends Controller
         if ($settings == null) {
             AppSetting::firstOrCreate(['title' => 'Bitmap :: You deserve a good design ']);
         }
-        return view("app_setting.index", ["settinginfo" => AppSetting::find(1)]);
+        return view("admin.app_setting.index", ["settinginfo" => AppSetting::find(1)]);
     }
 
     public function updateSettingPage(Request $request) {
@@ -125,9 +136,10 @@ class Webcontroller extends Controller
         $pavicon = "";
       
         if ($request->hasFile('logofile')) {
-            $file = MediaUploader::imageUpload($request->logofile, 'website', 1, null, [600, 600]);
+            MediaUploader::delete('website', $appsettings->logo);
+            $file = MediaUploader::imageUpload($request->logofile, 'website', 0);
             if ($file) {
-                $logo = $file['url'];
+                $logo = $file['name'];
             }
         } else {
             $logo = $appsettings->logo;
@@ -135,9 +147,10 @@ class Webcontroller extends Controller
          
 
         if ($request->hasFile('feviconfile')) {
-            $file = MediaUploader::imageUpload($request->logofile, 'website', 1, null, [600, 600]);
+            MediaUploader::delete('website', $appsettings->fevicon);
+            $file = MediaUploader::imageUpload($request->feviconfile, 'website', 0);
             if ($file) {
-                $pavicon  = $file['url'];
+                $pavicon  = $file['name'];
             }
         } else {
             $pavicon = $appsettings->fevicon;
