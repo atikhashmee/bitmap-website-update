@@ -16,37 +16,41 @@ class Webcontroller extends Controller
         if ($contact == null) {
             ContactForm::firstOrCreate(['contact_heading' => 'Contact Bitmap']);
         }
-        return view("contact.index", ['contactInfo' => ContactForm::find(1)]);
+        return view("admin.contact.index", ['contactInfo' => ContactForm::find(1)]);
     }
 
     public function storeContactForm(Request $request) {
-      
-        $contactimg = "";
-        if ($request->hasFile('signature_image')) {
-            $file = MediaUploader::imageUpload($request->signature_image, 'website', 1, null, [600, 600]);
-            if ($file) {
-                $contactimg = $file['url'];
+        try {
+            $contact_form_data =  ContactForm::where("id", 1)->first();
+            $contactimg = "";
+            if ($request->hasFile('imgfile')) {
+                MediaUploader::delete('website', $contact_form_data->contact_image);
+                $file = MediaUploader::imageUpload($request->imgfile, 'website', 0);
+                if ($file) {
+                    $contactimg = $file['name'];
+                }
+            } else {
+                $contactimg = $contact_form_data->contact_image;
             }
-        } else {
-            $contactimg = $request->input('dbimagefile');
+
+            $contact_form_data->update([
+                'contact_heading' => $request->input('headertitle'),
+                'little_description' => $request->input('description'),
+                'email' => $request->input('email'),
+                'cell' => $request->input('cell'),
+                'website' => $request->input('website'),
+                'address' => $request->input('address'),
+                'go_location' => $request->input('mapadrs'),
+                'note_on_go_location' => $request->input('mapnote'),
+                'contact_image' => $contactimg
+
+            ]);
+            Flash::success('Updated successfully.');
+            return redirect()->back();
+        } catch (\Exception $e) {
+            dd($e->getMessage());
         }
-
-        ContactForm::where("id", 1)->update([
-
-            'contact_heading' => $request->input('headertitle'),
-            'little_description' => $request->input('description'),
-            'email' => $request->input('email'),
-            'cell' => $request->input('cell'),
-            'website' => $request->input('website'),
-            'address' => $request->input('address'),
-            'go_location' => $request->input('mapadrs'),
-            'note_on_go_location' => $request->input('mapnote'),
-            'contact_image' => $contactimg
-
-        ]);
-
-        Flash::success('Updated successfully.');
-        return redirect()->back();
+       
     }
 
 

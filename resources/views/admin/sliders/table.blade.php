@@ -21,13 +21,13 @@
             <td>{{ $slider->is_visible }}</td>
             <td>{{ $slider->image }}</td>
                 <td width="120">
-                    {!! Form::open(['route' => ['sliders.destroy', $slider->id], 'method' => 'delete']) !!}
+                    {!! Form::open(['route' => ['admin.sliders.destroy', $slider->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
-                        <a href="{{ route('sliders.show', [$slider->id]) }}"
+                        <a href="{{ route('admin.sliders.show', [$slider->id]) }}"
                            class='btn btn-default btn-xs'>
                             <i class="far fa-eye"></i>
                         </a>
-                        <a href="{{ route('sliders.edit', [$slider->id]) }}"
+                        <a href="{{ route('admin.sliders.edit', [$slider->id]) }}"
                            class='btn btn-default btn-xs'>
                             <i class="far fa-edit"></i>
                         </a>

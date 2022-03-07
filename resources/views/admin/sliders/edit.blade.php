@@ -17,17 +17,17 @@
 
         <div class="card">
 
-            {!! Form::model($slider, ['route' => ['sliders.update', $slider->id], 'method' => 'patch', 'files' => true]) !!}
+            {!! Form::model($slider, ['route' => ['admin.sliders.update', $slider->id], 'method' => 'patch', 'files' => true]) !!}
 
             <div class="card-body">
                 <div class="row">
-                    @include('sliders.fields')
+                    @include('admin.sliders.fields')
                 </div>
             </div>
 
             <div class="card-footer">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('sliders.index') }}" class="btn btn-default">Cancel</a>
+                <a href="{{ route('admin.sliders.index') }}" class="btn btn-default">Cancel</a>
             </div>
 
             {!! Form::close() !!}

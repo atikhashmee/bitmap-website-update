@@ -22,7 +22,7 @@
 
         <div class="card">
             <div class="card-body">
-                <form action=" {{ route("update_contact_info") }} "  method="post" enctype="multipart/form-data">
+                <form action=" {{ route("admin.update_contact_info") }} "  method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                        <label for="example-text-input" class="col-form-label">Heading</label>

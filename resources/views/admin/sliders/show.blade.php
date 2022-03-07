@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-sm-6">
                     <a class="btn btn-default float-right"
-                       href="{{ route('sliders.index') }}">
+                       href="{{ route('admin.sliders.index') }}">
                         Back
                     </a>
                 </div>
@@ -21,7 +21,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="row">
-                    @include('sliders.show_fields')
+                    @include('admin.sliders.show_fields')
                 </div>
             </div>
         </div>

@@ -59,9 +59,9 @@ class SliderController extends AppBaseController
 
         $slider = $this->sliderRepository->create($input);
         if ($request->hasFile('image')) {
-            $file = MediaUploader::imageUpload($request->image, 'sliders', 1, null, [600, 600]);
+            $file = MediaUploader::imageUpload($request->image, 'sliders', 0);
             if ($file) {
-                $slider->fill(['image' => $file['url']]);
+                $slider->fill(['image' => $file['name']]);
             }
         }
         $slider->save();
@@ -121,17 +121,22 @@ class SliderController extends AppBaseController
     public function update($id, UpdateSliderRequest $request)
     {
         $slider = $this->sliderRepository->find($id);
-
+        $input = $request->all();
         if (empty($slider)) {
             Flash::error('Slider not found');
-
             return redirect(route('admin.sliders.index'));
         }
 
-        $slider = $this->sliderRepository->update($request->all(), $id);
-
+        if ($request->hasFile('image')) {
+            MediaUploader::delete('sliders', $slider->image);
+            $file = MediaUploader::imageUpload($request->image, 'sliders', 0);
+            if ($file) {
+                $input['image'] = $file['name'];
+            }
+        }
+        
+        $slider = $this->sliderRepository->update($input, $id);
         Flash::success('Slider updated successfully.');
-
         return redirect(route('admin.sliders.index'));
     }
 
@@ -153,11 +158,11 @@ class SliderController extends AppBaseController
 
             return redirect(route('admin.sliders.index'));
         }
-
+        MediaUploader::delete('sliders', $slider->image);
         $this->sliderRepository->delete($id);
 
         Flash::success('Slider deleted successfully.');
 
-        return redirect(route('sliders.index'));
+        return redirect(route('admin.sliders.index'));
     }
 }
