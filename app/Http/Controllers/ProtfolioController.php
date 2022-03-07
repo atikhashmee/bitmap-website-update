@@ -11,7 +11,7 @@ class ProtfolioController extends Controller
 
     public function getProtfolioImages($id) {
         $images = ProtfolioImage::where('protfolios_id', $id)->paginate(5);
-        return view("protfolio_image.index", ['images' => $images]);
+        return view("admin.protfolio_image.index", ['images' => $images]);
     }
     
     public function saveImages(Request $request) {
@@ -25,7 +25,7 @@ class ProtfolioController extends Controller
             foreach ($request->file('images') as $image) {
                 $file = MediaUploader::imageUpload($image, 'protfolio_image', 0);
                 $images[] = [
-                    'images' => $file['url'],
+                    'images' => $file['name'],
                     "protfolios_id" => $request->protfolio_id,
                 ];
             }
@@ -40,9 +40,7 @@ class ProtfolioController extends Controller
     public function deleteImages($id) {
 
         $imges = ProtfolioImage::find($id);
-        if (Storage::disk('public')->exists($imges->images)) {
-            Storage::disk("public")->delete($imges->images);
-        }
+        MediaUploader::delete('protfolio_image', $imges->images);
         $imges->delete();
         return redirect()->back()->withStatus("Image has been deleted");
     }

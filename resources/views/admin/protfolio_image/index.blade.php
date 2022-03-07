@@ -33,7 +33,7 @@
                                     </ul>
                                 </div>
                             @endif
-                            <form action="{{ route("protfolio.images.store")}}" class="form" method="post" enctype="multipart/form-data">
+                            <form action="{{ route("admin.protfolio.images.store")}}" class="form" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="protfolio_id" value="{{request()->route('id')}}">
                                 <div class="form-group">
@@ -41,7 +41,7 @@
                                 </div>
                                 <div class="form-group">
                                     <button name="saveimg" class="btn btn-outline-primary"> Save <i class="fa fa-floppy-o"></i> </button>
-                                    <a href="{{ route('protfolioItems.index') }}" class="btn btn-outline-primary">Go Back</a>
+                                    <a href="{{ route('admin.protfolioItems.index') }}" class="btn btn-outline-primary">Go Back</a>
                                 </div>
                             </form>
                         </div>
@@ -51,9 +51,13 @@
                           <div class="row">
                              @foreach ($images as $img)
                                 <div class="col-md-4">
-                                      <a href="{{ url("Admin/Protfolio/deleteImg/".$img->id) }}" onclick="return confirm('Are you sure?')" class="close" aria-label="Close">
+                                      <a href="javascript:void(0)" onclick="return confirm('Are you sure?') ? document.querySelector('#image_delete_form').submit(): null" class="close" aria-label="Close">
                                          <span style="color: red" aria-hidden="true">&times;</span>
                                       </a>
+                                      <form action="{{route('admin.protfolio.images.delete', ['id' => $img->id])}}" method="POST" id="image_delete_form">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
                                       <img class="img-thumbnail" src="{{ $img->images }}" alt="">
                                    </div>
                              @endforeach
