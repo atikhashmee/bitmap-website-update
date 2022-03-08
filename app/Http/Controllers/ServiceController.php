@@ -73,6 +73,37 @@ class ServiceController extends Controller
         ]);
         return redirect()->back()->withStatus("Data has been Saved");
     }
+    public function updateWhatWeDo(Request $request, $id) {
+        $coverphoto = "";
+        if ($request->hasFile('service_cover_photo')) {
+            MediaUploader::delete('what_we_do', $request->input("bgseimage"));
+            $file = MediaUploader::imageUpload($request->service_cover_photo, 'what_we_do', 0);
+            if ($file) {
+                $coverphoto = $file['name'];
+            }
+        } else {
+           $coverphoto = $request->input("bgseimage");
+        }
+
+        ServiceHolder::where("id", $id)->update([
+            "service_name" => $request->input('servicetitle'),
+            "about_service" => $request->input('about_project'),
+            "long_about_sevice" => $request->input('pro_detail'),
+            "date_time" => $request->input('date'),
+            "price" => $request->input('price'),
+            "services_photo" => $coverphoto
+        ]);
+
+        return redirect()->back()->withStatus("Data has been Updated");
+    }
+
+    public function destroyWhatWeDo($id)
+    {
+        $prot = ServiceHolder::find($id);
+        MediaUploader::delete('what_we_do', $prot->services_photo);
+        $prot->delete();
+        return redirect()->back()->withStatus("Data has been Deleted");
+    }
 
     public function storeServiceList(Request $request) {
         $Validator = Validator::make($request->all(), [
@@ -108,7 +139,18 @@ class ServiceController extends Controller
         ]);
         return redirect()->back()->withStatus("Data has been Saved");
     }
+    public function editServiceList($id)
+    {
+        return view('admin.service.services-edit')->with('editinfo',ServiceHolder::find($id));
+    }
+    public function destroyServiceList(ServicesLists $servicesLists, $id)
+    {
+        $prot =  ServicesLists::find($id);
+        MediaUploader::delete('service_list', $prot->img);
+        $prot->delete();
+        return redirect()->back()->withStatus("Data has been Deleted");
 
+    }
 
     public function storeClientInfo(Request $request) {
 
@@ -141,10 +183,47 @@ class ServiceController extends Controller
         return redirect()->back()->withStatus("Data has been Saved");
     }
 
+    public function editClientInfo(ClientsLists $clientsLists, $id)
+    {
+        return view("admin.service.client_edit")->with("client_info", ClientsLists::find($id));
+    }
+
     public function updateClientStatus($id, $status) {
         ClientsLists::where('id',$id)->update([
             'status' => $status
         ]);
         return redirect()->back()->withStatus("Client Name has been published to the website");
+    }
+
+    public function updateClientInfo(Request $request, ClientsLists $clientsLists, $id)
+    {
+        
+        $client_avatar = "";
+
+        if ($request->hasFile('client_avater')) {
+            MediaUploader::delete('clients', $request->input("dbclientavater"));
+            $file = MediaUploader::imageUpload($request->client_avater, 'clients', 0);
+            if ($file) {
+                $client_avatar = $file['name'];
+            }
+        } else {
+            $client_avatar = $request->input("dbclientavater");
+        }
+
+        ClientsLists::where("id",$id)->update([
+            'Compnay_name'  =>  $request->input('compnay_name'),
+            'phone_number' =>  $request->input('phone_number'),
+            'email'         =>  $request->input('email'),
+            'address'       =>  $request->input('address'),
+            'avater'        =>  $client_avatar
+        ]);
+        return redirect()->back()->withStatus("Data has been updated");
+    }
+    public function destroyClientInfo(ClientsLists $clientsLists, $id)
+    {
+        $prot = ClientsLists::find($id);
+        MediaUploader::delete('clients', $prot->avater);
+        $prot->delete();
+        return redirect()->back()->withStatus("Data has been Deleted");
     }
 }

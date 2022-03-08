@@ -74,11 +74,18 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
         Route::post('/update-background', "ServiceController@updateServiceBackground")->name('update.background');
 
         Route::post('/store-what-we-do', "ServiceController@storeWhatWeDo")->name('store.what-we-do');
+        Route::get('/service-list/{id}/edit', "ServiceController@editServiceList")->name('edit.service-list');
+        Route::patch('/update-what-we-do/{id}', "ServiceController@updateWhatWeDo")->name('update.what-we-do');
+        Route::get('/delete-what-we-do/{id}', "ServiceController@destroyWhatWeDo")->name('delete.what-we-do');
 
         Route::post('/store-service-list', "ServiceController@storeServiceList")->name('store.service-list');
+        Route::get('delete-service-list/{id}', "ServiceController@destroyServiceList")->name('delete.service-list');
 
         Route::post('/store-client', "ServiceController@storeClientInfo")->name('store.client');
+        Route::get('edit-client/{id}', "ServiceController@editClientInfo")->name('edit.client');
+        Route::patch('update-client/{id}', "ServiceController@updateClientInfo")->name('update.client');
         Route::get('action-publish/{id}/{status}', "ServiceController@updateClientStatus");
+        Route::get('delete-client/{id}', "ServiceController@destroyClientInfo")->name('delete.client');
     });
     
 });

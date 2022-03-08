@@ -93,9 +93,8 @@
                                          <img src="{{ asset("storage/".$service->services_photo) }}" alt="" class="rounded-circle" height="100" width="100" />
                                       </td>
                                       <td>
-                                         <a class="btn btn-primary" href="{{ url("Admin/Service/".$service->id."/edit") }}">Edit</a>
-                                         <a class="btn btn-primary" href="{{ url("Admin/delservice/".$service->id) }}"
-                                            onclick="return confirm('Are you sure?')">Delete</a>
+                                         <a class="btn btn-primary" href="{{ route("admin.service.edit.service-list", ['id' => $service->id]) }}">Edit</a>
+                                         <a class="btn btn-primary" href="{{ route("admin.service.delete.what-we-do", ['id' => $service->id]) }}" onclick="return confirm('Are you sure?')">Delete</a>
                                       </td>
                                    </tr>
                                 @endforeach
@@ -135,8 +134,7 @@
                                       <td>{{ $serviceitem->list_title }}</td>
                                       <td>{{ $serviceitem->short_description }}</td>
                                       <td><img src="{{ asset("storage/".$serviceitem->img) }}" width="48" height="40" /></td>
-                                      <td><a class="btn btn-danger btn-sm project-btn" onclick="return confirm('Are you sure?')"
-                                         href="{{  url("Admin/deletelists/".$serviceitem->id) }}">Delete</a></td>
+                                      <td><a class="btn btn-danger btn-sm project-btn" onclick="return confirm('Are you sure?')" href="{{ route("admin.service.delete.service-list", ['id' => $serviceitem->id]) }}">Delete</a></td>
                                    </tr>
                                 @endforeach
                              </tbody>
@@ -178,8 +176,8 @@
                                 <tr>
                                    <td> {{ $loop->iteration }} </td>
                                    <td> {{ $client->Compnay_name }} 
-                                      <a href="{{ url("Admin/Client_edit/".$client->id) }}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a> 
-                                      <a href="{{ url("Admin/Client_delete/".$client->id) }}" onclick="return confirm('Are you sure?')"  > <i class="fa fa-times-circle" style="color:red" aria-hidden="true"></i> </a>
+                                      <a href="{{ route("admin.service.edit.client", ['id' => $client->id]) }}"> Edit </a> 
+                                      <a href="{{ route("admin.service.delete.client", ['id' => $client->id]) }}" onclick="return confirm('Are you sure?')"  > Delete </a>
                                    </td>
                                    <td>
                                       Phone_Number =  {{ $client->phone_number }} <br>
