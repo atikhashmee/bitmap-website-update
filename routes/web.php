@@ -78,6 +78,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
         Route::post('/store-service-list', "ServiceController@storeServiceList")->name('store.service-list');
 
         Route::post('/store-client', "ServiceController@storeClientInfo")->name('store.client');
+        Route::get('action-publish/{id}/{status}', "ServiceController@updateClientStatus");
     });
     
 });

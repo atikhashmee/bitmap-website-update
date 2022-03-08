@@ -6,12 +6,16 @@ use App\Models\About;
 use App\Models\Slider;
 use App\Models\TeamType;
 use App\Models\HomeStyle;
+use App\Models\ServiceBg;
 use App\Models\AppSetting;
 use App\Models\ContactForm;
 use App\Models\ProtfolioBg;
 use App\Models\Testimonial;
+use App\Models\ClientsLists;
 use Illuminate\Http\Request;
 use App\Models\ProtfolioItem;
+use App\Models\ServiceHolder;
+use App\Models\ServicesLists;
 use App\Models\ProftfolioCategory;
 use Illuminate\Support\Facades\Artisan;
 

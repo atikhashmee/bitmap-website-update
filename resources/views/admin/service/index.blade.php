@@ -190,11 +190,11 @@
                                       <img src="{{ asset("storage/".$client->avater) }}" width="80" height="60" class="rounded-circle" alt="Cinque Terre">
                                    </td>
                                    <td> 
-                                      @if ($client->status == 0)
-                                      <a onclick="return confirm('Are you sure?')" href="{{ url('Admin/ActionPublish/'.$client->id.'/1') }}" class="btn btn-danger" >unpublished</a>
-                                      @else
-                                      <a onclick="return confirm('Are you sure?')" href="{{ url('Admin/ActionPublish/'.$client->id.'/0') }}" class="btn btn-primary" >Published</a>
-                                      @endif    
+                                       @if ($client->status == 0)
+                                          <a onclick="return confirm('Are you sure?')" href="{{ url('admin/service/action-publish/'.$client->id.'/1') }}" class="btn btn-danger" >unpublished</a>
+                                       @else
+                                          <a onclick="return confirm('Are you sure?')" href="{{ url('admin/service/action-publish/'.$client->id.'/0') }}" class="btn btn-primary" >Published</a>
+                                       @endif    
                                    </td>
                                 </tr>
                                 @endforeach

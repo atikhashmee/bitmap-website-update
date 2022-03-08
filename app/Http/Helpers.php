@@ -44,3 +44,22 @@ if ( ! function_exists('getPageName')) {
         }
      }
 }
+
+if ( ! function_exists('wordLimitForServicePage')) {
+    function wordLimitForServicePage($str, $limit) {
+        $words = explode(" ", $str);
+        $shown_string = "";
+        if (count($words) > $limit) {
+            if ( count($words) != 0 && !empty($str)) {
+                for ($i=0; $i <$limit; $i++) { 
+                    $shown_string .= $words[$i]." ";
+                }
+            }
+        } else {
+            $shown_string .= $str;
+        }
+       
+        $shown_string .= " <a href='#'>Readmore...</a>";
+        echo $shown_string;
+    }
+}

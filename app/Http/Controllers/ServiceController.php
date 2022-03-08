@@ -140,4 +140,11 @@ class ServiceController extends Controller
 
         return redirect()->back()->withStatus("Data has been Saved");
     }
+
+    public function updateClientStatus($id, $status) {
+        ClientsLists::where('id',$id)->update([
+            'status' => $status
+        ]);
+        return redirect()->back()->withStatus("Client Name has been published to the website");
+    }
 }
