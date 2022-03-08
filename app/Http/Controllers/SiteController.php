@@ -7,8 +7,12 @@ use App\Models\Slider;
 use App\Models\TeamType;
 use App\Models\HomeStyle;
 use App\Models\AppSetting;
+use App\Models\ContactForm;
+use App\Models\ProtfolioBg;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
+use App\Models\ProtfolioItem;
+use App\Models\ProftfolioCategory;
 use Illuminate\Support\Facades\Artisan;
 
 class SiteController extends Controller
@@ -58,5 +62,29 @@ class SiteController extends Controller
         ->with('teamtype',TeamType::all())
         ->with("testimonial", Testimonial::all())
         ->with("settings", AppSetting::first());
+    }
+
+    public function protfolio() {
+        $data = [];
+        $data['Protfolios'] = ProtfolioItem::all();
+        $data['Protfoliobg'] = ProtfolioBg::firstOrFail();
+        $data['pcate'] = ProftfolioCategory::all();
+        $data['settings'] = AppSetting::first();
+        return view("site.protfolio_dashboard", $data);
+    }
+
+    public function contactUs() {
+        return view("site.contact")
+       ->with("contact", ContactForm::first())
+       ->with("settings", AppSetting::first());
+    }
+
+    public function service() {
+        return view("site.service-n")
+        ->with("settings", AppSetting::first())
+        ->with('serviceBg', ServiceBg::first())
+        ->with('listsServices',ServicesLists::all())
+        ->with("clients", ClientsLists::where('status',1)->get())
+        ->with('servicesTop', ServiceHolder::all());
     }
 }
