@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Flash;
+use App\Models\About;
 use App\Models\HomeStyle;
 use App\Models\AppSetting;
 use App\Models\ContactForm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Laravel\Ui\Presets\React;
 use Sudip\MediaUploder\Facades\MediaUploader;
 
 class Webcontroller extends Controller
@@ -171,5 +173,56 @@ class Webcontroller extends Controller
         
         Flash::success('Updated successfully.');
         return redirect()->back();
+    }
+
+    public function aboutUs() {
+        $data = [];
+        $about = About::find(1);
+        if ($about == null) {
+            About::firstOrCreate(
+                ['headline_bg' => 'About Us']
+            );
+        }
+        $data['aboutinfo'] = About::find(1);
+        return view('admin.about.index', $data);
+    }
+
+    public function aboutUsUpdate(Request $request) {
+        $aboutimage = "";
+        $aboutbgimage = "";
+        $existing =  About::find(1);
+
+        if ($request->hasFile('aboutimage')) {
+            MediaUploader::delete('website', $existing->about_img);
+            $file = MediaUploader::imageUpload($request->aboutimage, 'website', 0);
+            if ($file) {
+                $aboutimage =  $file['name'];
+            }
+        } else {
+            $aboutimage = $existing->about_img;
+        }
+
+        if ($request->hasFile('bgimgfile')) {
+            MediaUploader::delete('website', $existing->image_bg);
+            $file = MediaUploader::imageUpload($request->bgimgfile, 'website', 0);
+            if ($file) {
+                $aboutbgimage =  $file['name'];
+            }
+        } else {
+            $aboutbgimage = $existing->image_bg;
+        } 
+            
+        $about = About::find(1);
+        $about->company_history_title = $request->input("history-headertitle");
+        $about->compnay_history_description = $request->input( "history-description");
+        $about->heading = $request->input("headertitle");
+        $about->description = $request->input("description");
+        $about->about_img = $aboutimage;
+        $about->headline_bg = $request->input("headerbg");
+        $about->description_bg = $request->input("descbg");
+        $about->youtubelink = $request->input("youtubelink");
+        $about->image_bg =   $aboutbgimage;
+        $about->save();
+        return redirect()->back()->withStatus("Data has been Updated");
     }
 }

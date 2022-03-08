@@ -22,7 +22,7 @@
                      </div>
                   </div>
                </div>
-               <div class="bg" data-bg="{{   asset("storage/".$about_info->image_bg) }}"></div>
+               <div class="bg" data-bg="{{   asset("storage/website/".$about_info->image_bg) }}"></div>
                <div class="overlay"></div>
                <div class="progress-bar-wrap bot-element">
                   <div class="progress-bar"></div>
@@ -137,7 +137,7 @@
                                        <div class="swiper-slide">
                                           <div class="testi-item fl-wrap">
                                              <div class="testi-avatar">
-                                                <img src="{{  asset("storage/".$testis->client_image) }}"alt="">
+                                                <img src="{{  asset("storage/website/".$testis->client_image) }}"alt="">
                                              </div>
                                              <h3>{{ $testis->client_name}}</h3>
                                              <p>"{{ $testis->client_comment}}"</p>

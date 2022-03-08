@@ -60,6 +60,12 @@
         <p>App Config</p>
     </a>
 </li>
+<li class="nav-item">
+    <a href="{{ route('admin.about_page') }}"
+       class="nav-link {{ Request::is('about_page') ? 'active' : '' }}">
+        <p>About Page</p>
+    </a>
+</li>
 
 
 
