@@ -72,7 +72,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
     Route::group(['prefix'=> 'service', 'as'=> 'service.'], function() {
         Route::get('/', 'ServiceController@index')->name('index');
         Route::post('/update-background', "ServiceController@updateServiceBackground")->name('update.background');
+
         Route::post('/store-what-we-do', "ServiceController@storeWhatWeDo")->name('store.what-we-do');
+
+        Route::post('/store-service-list', "ServiceController@storeServiceList")->name('store.service-list');
+
+        Route::post('/store-client', "ServiceController@storeClientInfo")->name('store.client');
     });
     
 });

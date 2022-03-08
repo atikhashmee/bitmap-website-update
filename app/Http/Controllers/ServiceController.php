@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\ServiceHolder;
 use App\Models\ServicesLists;
 use Illuminate\Support\Facades\Validator;
+use Laravel\Ui\Presets\React;
 use Sudip\MediaUploder\Facades\MediaUploader;
 
 class ServiceController extends Controller
@@ -70,6 +71,73 @@ class ServiceController extends Controller
             "price" => $request->input('price'), 
             "services_photo" => $coverphoto
         ]);
+        return redirect()->back()->withStatus("Data has been Saved");
+    }
+
+    public function storeServiceList(Request $request) {
+        $Validator = Validator::make($request->all(), [
+            'list_avater' => 'required',
+            'list_title' => 'required',
+            'short_description' => 'max:200'
+        ]);
+
+        if ($Validator->fails()) {
+            return redirect()->back()->withErrors($Validator, "service_list")->withInput();
+        }
+        
+        $coverphoto = "";
+
+        if ($request->hasFile('list_avater')) {
+            $file = MediaUploader::imageUpload($request->list_avater, 'service_list', 0);
+            if ($file) {
+                $coverphoto = $file['name'];
+            }
+        }
+
+        // if ($request->hasFile('list_avater')) {
+        //     Storage::disk('public')->delete(trim($request->input("bgseimage")));
+        //     $coverphoto = $request->file("list_avater")->store("ServicesList","public") ;
+        // } else {
+        //     $coverphoto = $request->input("bgseimage");
+        // }
+
+        ServicesLists::create([
+            'list_title' => $request->input( 'list_title'),
+            'short_description'=>  $request->input('short_description'),
+            'img' => $coverphoto
+        ]);
+        return redirect()->back()->withStatus("Data has been Saved");
+    }
+
+
+    public function storeClientInfo(Request $request) {
+
+        $Validator = Validator::make($request->all(), [
+            'compnay_name'  => 'required',
+            'client_avater' => 'required'
+        ]);
+
+        if ($Validator->fails()) {
+            return redirect()->back()->withErrors($Validator, "clients")->withInput();
+        }
+
+        $client_avatar = "";
+
+        if ($request->hasFile('client_avater')) {
+            $file = MediaUploader::imageUpload($request->client_avater, 'clients', 0);
+            if ($file) {
+                $client_avatar = $file['name'];
+            }
+        }
+
+        ClientsLists::create([
+            'Compnay_name'  =>  $request->input('compnay_name'),
+            'phone _number' =>  $request->input('phone_number'),
+            'email'         =>  $request->input('email'),
+            'address'       =>  $request->input('address'),
+            'avater'        =>  $client_avatar
+        ]);
+
         return redirect()->back()->withStatus("Data has been Saved");
     }
 }
