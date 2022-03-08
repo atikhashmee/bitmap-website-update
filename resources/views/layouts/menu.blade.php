@@ -77,3 +77,11 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('admin.service.index') }}"
+       class="nav-link {{ Request::is('admin.service*') ? 'active' : '' }}">
+        <p>Services</p>
+    </a>
+</li>
+
+
