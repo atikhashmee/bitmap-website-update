@@ -15,24 +15,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'SiteController@index');
 Route::get('/About', 'SiteController@about');
+Route::get('/protfolio-detail/{id}', 'SiteController@protfolioShow');
 Route::get('/Protfolio', 'SiteController@protfolio'); 
+// Route::get('/Prot/{id}', 'SiteController@protfolioShow');
 Route::get('/ContactUs', 'SiteController@contactUs'); 
 Route::get('/Service', 'SiteController@service'); 
-
-  Route::any('Protfolio/show/{id}', function ($id) {
-          //dd( ProtfolioImage::where("protfolios_id",$id)->get());
-        return view("site.single_protfolio")
-        ->with("details", Protfolio::find($id))
-        ->with("faqs",ProtfolioFaq::where("protfolios_id",$id)->get())
-        ->with("images", ProtfolioImage::where( "protfolios_id",$id)->get())
-        ->with("settings", AppSetting::first());
-  });
 
 
 Auth::routes(['verify' => true]);
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
-    
     Route::get('/home', 'HomeController@index')->middleware('verified');
     Route::resource('proftfolioCategories', 'ProftfolioCategoryController');
     Route::resource('testimonials', 'TestimonialController');

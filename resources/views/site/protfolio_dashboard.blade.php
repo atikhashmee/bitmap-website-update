@@ -16,7 +16,7 @@
                 <div class="all-album"></div>
             </div>
         </div>
-        <div class="gallery-items min-pad   four-column fl-wrap ff_panel-conainer">
+        <div class="gallery-items min-pad four-column fl-wrap ff_panel-conainer">
             @php $i=0; @endphp
             @foreach ($Protfolios as $protfolio)
                 @php $i++; @endphp
@@ -27,7 +27,7 @@
                             <div class="grid-det">
                                 <div class="grid-det_category"><a href="#">Architecture</a> <a href="#">Design</a></div>
                                 <div class="grid-det-item">
-                                    <a href="{{ url("/Protfolio/show/".$protfolio->id) }}" class="ajax grid-det_link">Go Details<i class="fal fa-long-arrow-right"></i></a>
+                                    <a href="{{ url('protfolio-detail/'.$protfolio->id) }} " class="ajax grid-det_link">Go Details<i class="fal fa-long-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -36,11 +36,12 @@
                 @else
                     <div class="gallery-item {{$protfolio->proftfolio_category_id}}">
                         <div class="grid-item-holder">
-                            <img  src="{{  asset("storage/".$protfolio->image) }}"    alt="">
+                            <img  src="{{ asset("storage/protfolios/".$protfolio->image) }}"    alt="">
                             <div class="grid-det">
                                 <div class="grid-det_category"><a href="#">Architecture</a> <a href="#">Design</a></div>
                                 <div class="grid-det-item">
-                                    <a href="{{ url("/Protfolio/show/".$protfolio->id) }}" class="ajax grid-det_link">Go Details<i class="fal fa-long-arrow-right"></i></a>
+                                    {{-- {{ url("/Prot/".$protfolio->id) }} --}}
+                                    <a href="{{ url('protfolio-detail/'.$protfolio->id) }} " class="ajax grid-det_link">Go Details<i class="fal fa-long-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>
