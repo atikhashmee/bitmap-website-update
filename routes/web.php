@@ -12,6 +12,14 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('command', function () {
+    \Artisan::call('cache:forget spatie.permission.cache');
+    \Artisan::call('cache:clear');
+    \Artisan::call('config:clear');
+    \Artisan::call('route:clear');
+    \Artisan::call('storage:link');
+    dd("All clear!");
+});
 
 Route::get('/', 'SiteController@index');
 Route::get('/About', 'SiteController@about');
