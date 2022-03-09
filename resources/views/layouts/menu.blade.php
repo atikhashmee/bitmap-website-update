@@ -47,12 +47,12 @@
     </a>
 </li>
 
-<li class="nav-item">
+{{-- <li class="nav-item">
     <a href="{{ route('admin.home_style_page') }}"
        class="nav-link {{ Request::is('home_style_page') ? 'active' : '' }}">
         <p>Home Style</p>
     </a>
-</li>
+</li> --}}
 
 <li class="nav-item">
     <a href="{{ route('admin.setting_page') }}"
