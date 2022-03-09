@@ -37,7 +37,7 @@
     <div class="form-check">
         {!! Form::hidden('is_visible', 0, ['class' => 'form-check-input']) !!}
         {!! Form::checkbox('is_visible', '1', null, ['class' => 'form-check-input']) !!}
-        {!! Form::label('is_visible', 'Is Visible', ['class' => 'form-check-label']) !!}
+        {!! Form::label('is_visible', 'Show on Website?', ['class' => 'form-check-label']) !!}
     </div>
 </div>
 

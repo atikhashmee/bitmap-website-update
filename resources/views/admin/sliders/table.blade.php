@@ -6,7 +6,7 @@
         <th>Url</th>
         <th>Post Date</th>
         <th>Description</th>
-        <th>Is Visible</th>
+        <th>Show on Website?</th>
         <th>Image</th>
             <th colspan="3">Action</th>
         </tr>
@@ -18,7 +18,7 @@
             <td>{{ $slider->url }}</td>
             <td>{{ $slider->post_date }}</td>
             <td>{{ $slider->description }}</td>
-            <td>{{ $slider->is_visible }}</td>
+            <td>{{ $slider->is_visible? "Yes": "No"}}</td>
             <td>{{ $slider->image }}</td>
                 <td width="120">
                     {!! Form::open(['route' => ['admin.sliders.destroy', $slider->id], 'method' => 'delete']) !!}

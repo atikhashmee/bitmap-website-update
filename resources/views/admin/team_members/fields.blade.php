@@ -6,7 +6,7 @@
 
 <!-- Team Type Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('team_type_id', 'Team Type Id:') !!}
+    {!! Form::label('team_type_id', 'Team Type:') !!}
     {!! Form::select('team_type_id', $team_typeItems, null, ['class' => 'form-control custom-select']) !!}
 </div>
 
@@ -41,7 +41,7 @@
     <div class="form-check">
         {!! Form::hidden('is_private', 0, ['class' => 'form-check-input']) !!}
         {!! Form::checkbox('is_private', '1', null, ['class' => 'form-check-input']) !!}
-        {!! Form::label('is_private', 'Is Private', ['class' => 'form-check-label']) !!}
+        {!! Form::label('is_private', 'Show On Website?', ['class' => 'form-check-label']) !!}
     </div>
 </div>
 

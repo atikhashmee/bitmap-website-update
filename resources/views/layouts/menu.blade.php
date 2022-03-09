@@ -3,7 +3,7 @@
 <li class="nav-item">
     <a href="{{ route('admin.proftfolioCategories.index') }}"
        class="nav-link {{ Request::is('proftfolioCategories*') ? 'active' : '' }}">
-        <p>Proftfolio Categories</p>
+        <p>Proftfolio Types</p>
     </a>
 </li>
 
