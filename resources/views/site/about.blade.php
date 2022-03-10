@@ -106,7 +106,7 @@
 								<a href="{{ $member->email }}" class="team-contact_btn color-bg"><i class="fal fa-envelope"></i></a>
 								</div>
 								<div class="team-info">
-								<h3>{{ $member->member_name }} </h3>
+								<h3>{{ $member->name }} </h3>
 								<h4>{{ $member->designation }}</h4>
 								<p>{{ $member->description }}</p>
 								</div>
