@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Providers;
-use App\Models\ProftfolioCategory;
-use App\Models\TeamType;
-use App\Models\Category;
-
-use Illuminate\Support\ServiceProvider;
 use View;
+use App\Models\Category;
+use App\Models\TeamType;
+
+use App\Models\AppSetting;
+use App\Models\ProftfolioCategory;
+use Illuminate\Support\ServiceProvider;
 
 class ViewServiceProvider extends ServiceProvider
 {
@@ -27,6 +28,11 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        View::composer(['site.pages.pages-layout'], function ($view) {
+            $view->with('settings', AppSetting::first());
+        });
+        //setting page end
+
         View::composer(['admin.protfolio_items.fields'], function ($view) {
             $proftfolio_categoryItems = ProftfolioCategory::pluck('name','id')->toArray();
             $view->with('proftfolio_categoryItems', $proftfolio_categoryItems);

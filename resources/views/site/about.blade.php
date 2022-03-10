@@ -97,7 +97,7 @@
 								<div class="pr-bg pr-bg-white"></div>
 								<div class="team-photo">
 								<div class="overlay"></div>
-								<img src="{{ asset("storage/".$member->memberimage) }}" alt="" class="respimg">
+								<img src="{{ asset("storage/sliders/".$member->memberimage) }}" alt="" class="respimg">
 								<ul class="team-social">
 									<li><a href="https://www.instagram.com/{{ $member->instagram }}" target="_blank"><i class="fab fa-instagram"></i></a></li>
 									<li><a href="https://twitter.com/{{ $member->twitter }}" target="_blank"><i class="fab fa-twitter"></i></a></li>
@@ -137,7 +137,7 @@
 									<div class="swiper-slide">
 										<div class="testi-item fl-wrap">
 											<div class="testi-avatar">
-											<img src="{{  asset("storage/website/".$testis->client_image) }}"alt="">
+											<img src="{{  asset("storage/testimonial/".$testis->client_image) }}"alt="">
 											</div>
 											<h3>{{ $testis->client_name}}</h3>
 											<p>"{{ $testis->client_comment}}"</p>

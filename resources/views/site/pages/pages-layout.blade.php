@@ -25,7 +25,10 @@
     </div>
     <div id="main">
         <header class="main-header">
-        <a href="{{ url('/') }}" class="header-logo ajax"><img src="{{ asset("siteasset/img/templogo.png") }}" alt=""></a>
+        <a href="{{ url('/') }}" class="header-logo ajax">
+            {{-- <img src="{{ asset("siteasset/img/templogo.png") }}" alt=""> --}}
+            {!! MediaUploader::showImg('website', $settings->logo) !!}
+        </a>
             <div class="nav-button-wrap">
                 <div class="nav-button">
                     <span  class="nos"></span>
