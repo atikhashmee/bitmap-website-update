@@ -97,7 +97,7 @@
 								<div class="pr-bg pr-bg-white"></div>
 								<div class="team-photo">
 								<div class="overlay"></div>
-								<img src="{{ asset("storage/sliders/".$member->image) }}" alt="" class="respimg">
+								<img src="{{ asset("storage/team_members/".$member->image) }}" alt="" class="respimg">
 								<ul class="team-social">
 									<li><a href="https://www.instagram.com/{{ $member->instagram }}" target="_blank"><i class="fab fa-instagram"></i></a></li>
 									<li><a href="https://twitter.com/{{ $member->twitter }}" target="_blank"><i class="fab fa-twitter"></i></a></li>
